@@ -16,13 +16,27 @@ function Matrix(rows, columns) {
   });
 }
 
+Matrix.prototype.checkDimension = function checkDimension(matrixA, matrixB) {
+  if (matrixA.rows !== matrixB.rows || matrixA.columns !== matrixB.columns) throw new Error('Two Matrixs need to have the same dimension.');
+};
+
 Matrix.prototype.multiply = function multiply(n) {
-  this.matrix = this.matrix.map(element => element.map(num => num * n));
+  if (typeof n === 'object') {
+    this.checkDimension(this, n);
+    this.matrix = this.matrix.map((element, indexA) =>
+      element.map((num, indexB) => num * n.matrix[indexA][indexB]));
+  } else
+    this.matrix = this.matrix.map(element => element.map(num => num * n));
   return this.matrix;
 };
 
 Matrix.prototype.add = function add(n) {
-  this.matrix = this.matrix.map(element => element.map(num => num + n));
+  if (typeof n === 'object') {
+    this.checkDimension(this, n);
+    this.matrix = this.matrix.map((element, indexA) =>
+      element.map((num, indexB) => num + n.matrix[indexA][indexB]));
+  } else
+    this.matrix = this.matrix.map(element => element.map(num => num + n));
   return this.matrix;
 };
 
