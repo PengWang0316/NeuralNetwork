@@ -55,4 +55,32 @@ describe('Test Matrix', () => {
     const matrixB = new Matrix(4, 5);
     expect(() => matrixA.add(matrixB)).toThrow(new Error('Two Matrixs need to have the same dimension.'));
   });
+
+  test('matrixMultiply', () => {
+    const matrixA = new Matrix(2, 3);
+    const matrixB = new Matrix(3, 2);
+    matrixA.matrix[0][0] = 1;
+    matrixB.matrix[0][0] = 1;
+    matrixA.matrix[0][1] = 2;
+    matrixB.matrix[0][1] = 2;
+    matrixA.matrix[0][2] = 3;
+    matrixA.matrix[1][0] = 4;
+    matrixB.matrix[1][0] = 3;
+    matrixA.matrix[1][1] = 5;
+    matrixB.matrix[1][1] = 4;
+    matrixA.matrix[1][2] = 6;
+    matrixB.matrix[2][0] = 5;
+    matrixB.matrix[2][1] = 6;
+
+    const expectArray = [[22, 28], [49, 64]];
+
+    expect(matrixA.matrixMultiply(matrixB).matrix).toEqual(expectArray);
+  });
+
+  test('matrixMultiply with different dimensions', () => {
+    const matrixA = new Matrix(2, 3);
+    const matrixB = new Matrix(4, 2);
+    expect(() => matrixA.matrixMultiply(matrixB)).toThrow(new Error(`Argument has to be a matrix with ${matrixA.columns} rows.`));
+    expect(() => matrixA.matrixMultiply(1)).toThrow(new Error(`Argument has to be a matrix with ${matrixA.columns} rows.`));
+  });
 });
