@@ -16,28 +16,32 @@ function Matrix(rows, columns) {
   });
 }
 
-Matrix.prototype.checkDimension = function checkDimension(matrixA, matrixB) {
-  if (matrixA.rows !== matrixB.rows || matrixA.columns !== matrixB.columns) throw new Error('Two Matrixs need to have the same dimension.');
+Matrix.prototype.applyCalculation = function applyCalculation({
+  number, matrixFn, scalerFn
+}) {
+  const isMatrix = number instanceof Matrix;
+  if (isMatrix && (this.rows !== number.rows || this.columns !== number.columns))
+    throw new Error('Two Matrixs need to have the same dimension.');
+  this.matrix = this.matrix.map(isMatrix ? matrixFn : scalerFn);
+  return this.matrix;
 };
 
 Matrix.prototype.multiply = function multiply(n) {
-  if (typeof n === 'object') {
-    this.checkDimension(this, n);
-    this.matrix = this.matrix.map((element, indexA) =>
-      element.map((num, indexB) => num * n.matrix[indexA][indexB]));
-  } else
-    this.matrix = this.matrix.map(element => element.map(num => num * n));
-  return this.matrix;
+  return this.applyCalculation({
+    number: n,
+    matrixFn: (element, indexA) =>
+      element.map((num, indexB) => num * n.matrix[indexA][indexB]),
+    scalerFn: element => element.map(num => num * n)
+  });
 };
 
 Matrix.prototype.add = function add(n) {
-  if (typeof n === 'object') {
-    this.checkDimension(this, n);
-    this.matrix = this.matrix.map((element, indexA) =>
-      element.map((num, indexB) => num + n.matrix[indexA][indexB]));
-  } else
-    this.matrix = this.matrix.map(element => element.map(num => num + n));
-  return this.matrix;
+  return this.applyCalculation({
+    number: n,
+    matrixFn: (element, indexA) =>
+      element.map((num, indexB) => num + n.matrix[indexA][indexB]),
+    scalerFn: element => element.map(num => num + n)
+  });
 };
 
 module.exports = Matrix;
