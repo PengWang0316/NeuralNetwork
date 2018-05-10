@@ -9,12 +9,10 @@ function Matrix(rows, columns) {
   this.columns = columns;
   // Initialize a array and fill 0 in it.
   this.matrix = new Array(rows);
-  this.matrix.fill([]);
-  this.matrix = this.matrix.map(() => {
-    const tempArray = [];
-    tempArray.length = columns;
-    tempArray.fill(0);
-    return tempArray;
+  this.matrix.fill(new Array(columns));
+  this.matrix = this.matrix.map((element) => {
+    element.fill(0);
+    return element;
   });
 }
 
