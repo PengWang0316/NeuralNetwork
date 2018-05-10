@@ -18,10 +18,12 @@ function Matrix(rows, columns) {
 
 Matrix.prototype.multiply = function multiply(n) {
   this.matrix = this.matrix.map(element => element.map(num => num * n));
+  return this.matrix;
 };
 
 Matrix.prototype.add = function add(n) {
   this.matrix = this.matrix.map(element => element.map(num => num + n));
+  return this.matrix;
 };
 
 module.exports = Matrix;
