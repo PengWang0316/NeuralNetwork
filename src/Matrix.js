@@ -57,4 +57,12 @@ Matrix.prototype.matrixMultiply = function matrixMultiply(matrix) {
   return newMatrix;
 };
 
+Matrix.prototype.transpose = function transpose() {
+  const newMatrix = new Matrix(this.columns, this.rows);
+  this.matrix.forEach((rowElement, rowIndex) => {
+    for (let i = 0; i < this.columns; i++) newMatrix.matrix[i][rowIndex] = rowElement[i];
+  });
+  return newMatrix;
+};
+
 module.exports = Matrix;

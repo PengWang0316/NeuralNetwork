@@ -83,4 +83,18 @@ describe('Test Matrix', () => {
     expect(() => matrixA.matrixMultiply(matrixB)).toThrow(new Error(`Argument has to be a matrix with ${matrixA.columns} rows.`));
     expect(() => matrixA.matrixMultiply(1)).toThrow(new Error(`Argument has to be a matrix with ${matrixA.columns} rows.`));
   });
+
+  test('transpose', () => {
+    const matrixA = new Matrix(2, 3);
+    matrixA.matrix[0][0] = 1;
+    matrixA.matrix[0][1] = 2;
+    matrixA.matrix[0][2] = 3;
+    matrixA.matrix[1][0] = 4;
+    matrixA.matrix[1][1] = 5;
+    matrixA.matrix[1][2] = 6;
+
+    const expectArray = [[1, 4], [2, 5], [3, 6]];
+
+    expect(matrixA.transpose().matrix).toEqual(expectArray);
+  });
 });
