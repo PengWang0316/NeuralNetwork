@@ -2,7 +2,7 @@
   "name": "neural-network",
   "version": "1.0.0",
   "description": "The simple neural network for the test.",
-  "main": "index.js",
+  "main": "NeuralNetwork.js",
   "scripts": {
     "test": "jest --coverage",
     "build": "babel src --out-dir distribution",
