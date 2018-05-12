@@ -12,8 +12,8 @@ describe('Test Matrix', () => {
     const matrix = new Matrix(3, 5);
     matrix.matrix[0][0] = 2;
     const newMatrix = matrix.multiply(2);
-    expect(matrix.matrix[0][0]).toBe(4);
-    expect(newMatrix[0][0]).toBe(4);
+    expect(matrix.matrix[0][0]).toBe(2);
+    expect(newMatrix.matrix[0][0]).toBe(4);
   });
 
   test('multiply a same dimension matrix', () => {
@@ -22,8 +22,8 @@ describe('Test Matrix', () => {
     matrixA.matrix[0][0] = 2;
     matrixB.matrix[0][0] = 3;
     const newMatrix = matrixA.multiply(matrixB);
-    expect(matrixA.matrix[0][0]).toBe(6);
-    expect(newMatrix[0][0]).toBe(6);
+    expect(matrixA.matrix[0][0]).toBe(2);
+    expect(newMatrix.matrix[0][0]).toBe(6);
   });
 
   test('multiply a differnet dimension matrix', () => {
@@ -36,8 +36,8 @@ describe('Test Matrix', () => {
     const matrix = new Matrix(3, 5);
     matrix.matrix[0][0] = 3;
     const newMatrix = matrix.add(5);
-    expect(matrix.matrix[0][0]).toBe(8);
-    expect(newMatrix[0][0]).toBe(8);
+    expect(matrix.matrix[0][0]).toBe(3);
+    expect(newMatrix.matrix[0][0]).toBe(8);
   });
 
   test('add a same dimension matrix', () => {
@@ -46,8 +46,8 @@ describe('Test Matrix', () => {
     matrixA.matrix[0][0] = 2;
     matrixB.matrix[0][0] = 3;
     const newMatrix = matrixA.add(matrixB);
-    expect(matrixA.matrix[0][0]).toBe(5);
-    expect(newMatrix[0][0]).toBe(5);
+    expect(matrixA.matrix[0][0]).toBe(2);
+    expect(newMatrix.matrix[0][0]).toBe(5);
   });
 
   test('add a differnet dimension matrix', () => {
@@ -96,5 +96,14 @@ describe('Test Matrix', () => {
     const expectArray = [[1, 4], [2, 5], [3, 6]];
 
     expect(matrixA.transpose().matrix).toEqual(expectArray);
+  });
+
+  test('randomize', () => {
+    const matrixA = new Matrix(2, 3);
+    const matrixB = new Matrix(2, 3);
+    matrixA.randomize();
+    matrixB.randomize();
+
+    expect(matrixA.matrix).not.toEqual(matrixB.matrix);
   });
 });
