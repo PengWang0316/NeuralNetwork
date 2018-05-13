@@ -1,6 +1,16 @@
 /** The Matrix class */
 class Matrix {
   /**
+   * Create a Matrix object from a giving array.
+   * @param {array} array is a input array.
+   * @return {object} Rreturn a Matrix object.
+   */
+  static createMatrixFromArray(array) {
+    const matrix = new Matrix(array.length, array[0].length);
+    matrix.matrix = [...array];
+    return matrix;
+  }
+  /**
    * The constructor
    * @param {number} rows is the number of rows for the maxtrix.
    * @param {number} columns is the number of columns for the maxtrix.

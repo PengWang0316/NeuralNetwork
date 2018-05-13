@@ -8,6 +8,16 @@ describe('Test Matrix', () => {
     expect(matrix.matrix[0][0]).toBe(0);
   });
 
+  test('createMatrixFromArray', () => {
+    const array = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]];
+    const matrix = Matrix.createMatrixFromArray(array);
+
+    expect(matrix.rows).toBe(3);
+    expect(matrix.columns).toBe(4);
+    expect(matrix.matrix).toEqual(array);
+    expect(matrix.matrix).not.toBe(array);
+  });
+
   test('multiply a scaler', () => {
     const matrix = new Matrix(3, 5);
     matrix.matrix[0][0] = 2;
