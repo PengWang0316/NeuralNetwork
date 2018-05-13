@@ -87,6 +87,24 @@ describe('Test Matrix', () => {
     expect(matrixA.matrixMultiply(matrixB).matrix).toEqual(expectArray);
   });
 
+  test.only('matrixMultiply 1 column', () => {
+    const matrixA = new Matrix(2, 3);
+    const matrixB = new Matrix(3, 1);
+    matrixA.matrix[0][0] = 1;
+    matrixB.matrix[0][0] = 1;
+    matrixA.matrix[0][1] = 2;
+    matrixA.matrix[0][2] = 3;
+    matrixA.matrix[1][0] = 4;
+    matrixB.matrix[1][0] = 2;
+    matrixA.matrix[1][1] = 5;
+    matrixA.matrix[1][2] = 6;
+    matrixB.matrix[2][0] = 3;
+
+    const expectArray = [[14], [32]];
+
+    expect(matrixA.matrixMultiply(matrixB).matrix).toEqual(expectArray);
+  });
+
   test('matrixMultiply with different dimensions', () => {
     const matrixA = new Matrix(2, 3);
     const matrixB = new Matrix(4, 2);

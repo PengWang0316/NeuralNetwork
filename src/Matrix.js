@@ -80,10 +80,10 @@ class Matrix {
    */
   matrixMultiply(matrix) {
     if (!(matrix instanceof Matrix) || this.columns !== matrix.rows) throw new Error(`Argument has to be a matrix with ${this.columns} rows.`);
-    const newMatrix = new Matrix(this.rows, this.rows);
+    const newMatrix = new Matrix(this.rows, matrix.columns);
     this.matrix.forEach((matrixArow, index) => {
       matrixArow.forEach((element, rowIndex) => {
-        for (let i = 0; i < this.rows; i++)
+        for (let i = 0; i < matrix.columns; i++)
           newMatrix.matrix[index][i] += element * matrix.matrix[rowIndex][i];
       });
     });
