@@ -57,6 +57,7 @@ describe('Test Matrix', () => {
     matrixB.matrix[0][0] = 3;
     const newMatrix = matrixA.add(matrixB);
     expect(matrixA.matrix[0][0]).toBe(2);
+    expect(matrixB.matrix[0][0]).toBe(3);
     expect(newMatrix.matrix[0][0]).toBe(5);
   });
 
@@ -64,6 +65,31 @@ describe('Test Matrix', () => {
     const matrixA = new Matrix(3, 5);
     const matrixB = new Matrix(4, 5);
     expect(() => matrixA.add(matrixB)).toThrow(new Error('Two Matrixs need to have the same dimension.'));
+  });
+
+  test('subtract a scaler', () => {
+    const matrix = new Matrix(3, 5);
+    matrix.matrix[0][0] = 8;
+    const newMatrix = matrix.subtract(5);
+    expect(matrix.matrix[0][0]).toBe(8);
+    expect(newMatrix.matrix[0][0]).toBe(3);
+  });
+
+  test('subtract a same dimension matrix', () => {
+    const matrixA = new Matrix(3, 5);
+    const matrixB = new Matrix(3, 5);
+    matrixA.matrix[0][0] = 10;
+    matrixB.matrix[0][0] = 3;
+    const newMatrix = matrixA.subtract(matrixB);
+    expect(matrixA.matrix[0][0]).toBe(10);
+    expect(matrixB.matrix[0][0]).toBe(3);
+    expect(newMatrix.matrix[0][0]).toBe(7);
+  });
+
+  test('subtract a differnet dimension matrix', () => {
+    const matrixA = new Matrix(3, 5);
+    const matrixB = new Matrix(4, 5);
+    expect(() => matrixA.subtract(matrixB)).toThrow(new Error('Two Matrixs need to have the same dimension.'));
   });
 
   test('matrixMultiply', () => {
@@ -87,7 +113,7 @@ describe('Test Matrix', () => {
     expect(matrixA.matrixMultiply(matrixB).matrix).toEqual(expectArray);
   });
 
-  test.only('matrixMultiply 1 column', () => {
+  test('matrixMultiply 1 column', () => {
     const matrixA = new Matrix(2, 3);
     const matrixB = new Matrix(3, 1);
     matrixA.matrix[0][0] = 1;

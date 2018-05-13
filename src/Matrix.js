@@ -74,6 +74,20 @@ class Matrix {
   }
 
   /**
+   * Subtract a scaler or a matrix
+   * @param {object} n could be a scaler or a matrix object.
+   * @return {object} Returnt an a matrix object.
+   */
+  subtract(n) {
+    return this.applyCalculation({
+      number: n,
+      matrixFn: (element, indexA) =>
+        element.map((num, indexB) => num - n.matrix[indexA][indexB]),
+      scalerFn: element => element.map(num => num - n)
+    });
+  }
+
+  /**
    * Conduct matrix product calculation for a matrix
    * @param {object} matrix is a matrix object.
    * @return {object} Returnt an a matrix object.
