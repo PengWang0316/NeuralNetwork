@@ -116,4 +116,17 @@ describe('Test Matrix', () => {
 
     expect(matrixA.matrix).not.toEqual(matrixB.matrix);
   });
+
+  test('applyFunction', () => {
+    const matrixA = new Matrix(2, 3);
+    matrixA.matrix[0][0] = 1;
+    matrixA.matrix[0][1] = 2;
+    matrixA.matrix[0][2] = 3;
+    matrixA.matrix[1][0] = 4;
+    matrixA.matrix[1][1] = 5;
+    matrixA.matrix[1][2] = 6;
+
+    const expectArray = [[2, 3, 4], [5, 6, 7]];
+    expect(matrixA.applyFunction(val => val + 1).matrix).toEqual(expectArray);
+  });
 });

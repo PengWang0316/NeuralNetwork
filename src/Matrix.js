@@ -109,6 +109,16 @@ class Matrix {
   randomize() {
     this.matrix = this.matrix.map(rowElement => rowElement.map(() => (Math.random() * 2) - 1));
   }
+
+  /**
+   * Apply a function to every element and return a new Matrix object.
+   * @param {function} fn is a function that will be applied to elements.
+   * @return {object} Return a new Matrix.
+   */
+  applyFunction(fn) {
+    return Matrix.createMatrixFromArray(this.matrix.map(rowElement =>
+      rowElement.map(element => fn(element))));
+  }
 }
 
 module.exports = Matrix;
