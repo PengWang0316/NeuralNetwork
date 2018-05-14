@@ -1,4 +1,5 @@
 import NeuralNetwork from '../src/NeuralNetwork';
+import Matrix from '../src/Matrix';
 
 describe('NeuralNetwork test', () => {
   test('Initialize', () => {
@@ -35,5 +36,18 @@ describe('NeuralNetwork test', () => {
     expect(NeuralNetwork.sigmoid(1.22220)).toBeGreaterThanOrEqual(0);
     expect(NeuralNetwork.sigmoid(-1.22220)).toBeLessThanOrEqual(1);
     expect(NeuralNetwork.sigmoid(-1.22220)).toBeGreaterThanOrEqual(0);
+  });
+
+  test('feedforward', () => {
+    const nn = new NeuralNetwork(3, 2, 2);
+    const inputArray = [[1], [2], [3]];
+    nn.feedforward(Matrix.createMatrixFromArray(inputArray));
+  });
+
+  test('train', () => {
+    const nn = new NeuralNetwork(3, 2, 2);
+    const inputArray = [[1], [2], [3]];
+    const targetArray = [[1], [0]];
+    nn.train(inputArray, targetArray);
   });
 });

@@ -32,16 +32,40 @@ class NeuralNetwork {
     // Save bias matrixs
     this.biasHidden = new Matrix(hiddenNodeNum, 1);
     this.biasOutput = new Matrix(outputNodeNum, 1);
+    this.biasHidden.randomize();
+    this.biasOutput.randomize();
   }
 
   /**
    * @param {object} input could be a Matrix object or a array that contains input values.
-   * @return {null} No return for now.
+   * @return {object} Return a Matrix object.
    */
   feedforward(input) {
     const inputMatrix = input instanceof Array ? Matrix.createMatrixFromArray(input) : input;
-    const hiddentMatrix = this.weightInputHidden.matrixMultiply(inputMatrix).add(this.biasHidden);
-    // Activation function here.
+    // Generating the hidden outputs.
+    const hiddentMatrix = this.weightInputHidden
+      .matrixMultiply(inputMatrix).add(this.biasHidden).applyFunction(NeuralNetwork.sigmoid);
+    // console.log('Hidden input');
+    // console.log(hiddentMatrix);
+    // Generating the output.
+    const outputMatrix = this.weightHiddenOutput
+      .matrixMultiply(hiddentMatrix).add(this.biasOutput).applyFunction(NeuralNetwork.sigmoid);
+    // console.log('Output');
+    // console.log(outputMatrix);
+    return outputMatrix;
+  }
+
+  /**
+   * Traning function
+   * @param {object} input could be an array or a Matrix object that contains the input values.
+   * @param {object} target could be an array or a Matrix object that contains the right answers.
+   * @return {null} No return.
+   */
+  train(input, target) {
+    const output = this.feedforward(input);
+    const targetMatrix = target instanceof Array ? Matrix.createMatrixFromArray(target) : target;
+    const outputError = targetMatrix.subtract(output);
+    const hiddenError = this.weightHiddenOutput.transpose().matrixMultiply(outputError);
   }
 }
 
